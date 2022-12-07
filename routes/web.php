@@ -85,3 +85,9 @@ Route::get('/admins/editadmin/{adminID}',[ FirebaseController::class ,'getAdminD
 Route::post('admins', [FirebaseController::class ,'updateAdminDetail'])->name('admin.update');
 //Add Admin
 Route::post('addAdmin', [FirebaseController::class ,'addAdminDetail'])->name('admin.add');
+//check Login
+Route::post('/dashboard', [FirebaseController::class ,'validateLogin'])->name('validate.login');
+// login page
+Route::get('/login', [ FirebaseController::class ,'loginPage'])->name('admin.login');
+//logout page
+Route::post('/login', 'UserController@logout')->name('admin.logout');

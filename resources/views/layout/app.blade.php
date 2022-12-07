@@ -60,9 +60,9 @@
         
         <div class="footer-pad">
           <h4>Contact</h4>
-        <p class="location"><i class="bi bi-geo-alt-fill loc"></i> Falak Naz Tower</p>
+        <p class="location"><i class="bi bi-geo-alt-fill loc"></i> Muhammad Ali Jinnah University</p>
         <p class="number"><i class="bi bi-telephone-fill loc"></i> 03079286358</p>
-         <p class="email"><i class="bi bi-envelope-fill loc"></i> aquamelas@gmail.com</p> 
+         <p class="email"><i class="bi bi-envelope-fill loc"></i> aquameals19@gmail.com</p> 
         </div>
       </div>
 

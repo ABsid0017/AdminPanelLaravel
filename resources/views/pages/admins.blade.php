@@ -93,7 +93,7 @@
               {{
                 if($adminDetails['status']==0){
                 @endphp
-                  <span>InActive</span>
+                  <span style="background-color: #DBF9FC;">InActive</span>
                 @php
                 }                                                
                 else{

@@ -16,6 +16,8 @@
   
  <body>
   
+
+
 <div class="section">
 
  <div class="container">
@@ -23,29 +25,31 @@
     <div class="left-side">
 
      <div> <span class="brand">
-    <small>ADMIN PANEL</small></span> 
+      <small>ADMIN PANEL</small></span> 
       
-      <form style="width: 250px;">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-    
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-  </div>
-  <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-  </div>
-  <div class="btn-block">
-    <a class="btn btn-primary btn-block" href="{{ url('/dashboard') }}">Login</a>
-    
-  </div>
-  
-   
-</form>
+      <div id="err" style="color: red">
+        @if(session()->has('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+      </div>
+
+      <form style="width: 250px;" method="POST" action="{{route('validate.login')}}">
+      @csrf
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        
+        <div class="btn-block">
+          <input type="submit" value="Submit" class="btn btn-primary btn-block text-white">
+        </div>
+
+      </form>
         </div> 
       </div>
        <div class="right-side"> 

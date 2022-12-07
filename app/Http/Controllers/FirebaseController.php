@@ -21,7 +21,7 @@ class FirebaseController extends Controller
         foreach ($products as $document) { 
             array_push($productDetails, $document->data());
         }
-        $orders = app('firebase.firestore')->database()->collection('orders')->documents();
+        $orders = app('firebase.firestore')->database()->collection('orders/3I5gqAREx3MaA4C89QvT/orders')->documents();
         foreach ($orders as $document) { 
             array_push($orderDetails, $document->data());
         }
@@ -204,6 +204,60 @@ class FirebaseController extends Controller
         $status = $request->statusDD;
         $admin = app('firebase.firestore')->database()->collection('users/WvamEGwHsbNkF3KImk2V/admin')->add(['name' => $name, 'email' => $email, 'password' => $password, 'phone' => $phone, 'status' => (int)$status]);
         return view('pages/admins');
+    }
+
+    public function validateLogin(Request $request)
+    {
+        $email = $request->email;
+        $password = $request->password;
+        $flag=0;
+        $admin = app('firebase.firestore')->database()->collection('users/WvamEGwHsbNkF3KImk2V/admin')->where('email', '=', $email)->where('password', '=', $password)->where('status', '=', 1)->documents();
+        foreach ($admin as $document) {
+            if ($document->exists()) {
+                $flag=1;
+            }
+            else{
+                $flag=0; 
+            }
+        }
+
+        if($flag==1){
+            $sellerDetails=[];
+            $productDetails=[];
+            $orderDetails=[];
+            $sellers = app('firebase.firestore')->database()->collection('users/WvamEGwHsbNkF3KImk2V/sellers')->documents();
+            foreach ($sellers as $document) { 
+                array_push($sellerDetails, $document->data());
+            }
+            $products = app('firebase.firestore')->database()->collection('products')->documents();
+            foreach ($products as $document) { 
+                array_push($productDetails, $document->data());
+            }
+            $orders = app('firebase.firestore')->database()->collection('orders/3I5gqAREx3MaA4C89QvT/orders')->documents();
+            foreach ($orders as $document) { 
+                array_push($orderDetails, $document->data());
+            }
+
+            $sellersCount = count($sellerDetails);
+            $productCount = count($productDetails);
+            $orderCount = count($orderDetails);
+            return view('pages.dashboard',compact('sellersCount','productCount','orderCount'));
+        }
+        else{
+            session()->flash('error', 'Invalid Credentials');
+            return redirect()->route('admin.login');
+        }
+    }
+
+    public function loginPage(){
+        return view('pages.login');
+    }
+
+    public function logout(Request $request)
+    {
+       
+        $request->session()->flush();
+        return redirect()->route('admin.login');
     }
 
 }
