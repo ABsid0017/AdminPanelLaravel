@@ -21,30 +21,66 @@ Route::get('/', function () {
 Route::get('/dashboard', [FirebaseController::class,'dasboardCount']);
 
 Route::get('/users', function () {
-    return view('pages/users');
+    if(session()->has('user')){
+        return view('pages/users');
+    }
+    else{
+        return redirect()->route('admin.login');
+    }
 });
 
 Route::get('/products', function () {
-    return view('pages/products');
+    if(session()->has('user')){
+        return view('pages/products');
+    }
+    else{
+        return redirect()->route('admin.login');
+    }
 });
 Route::get('/complains', function () {
-    return view('pages/complains');
+    if(session()->has('user')){
+        return view('pages/complains');
+    }
+    else{
+        return redirect()->route('admin.login');
+    }
+    
 });
 
 Route::get('/admins', function () {
-    return view('pages/admins');
+    if(session()->has('user')){
+        return view('pages/admins');
+    }
+    else{
+        return redirect()->route('admin.login');
+    }
 });
 
 Route::get('/admins/addAdmins', function () {
-    return view('inner_pages/addAdmins');
+    if(session()->has('user')){
+        return view('inner_pages/addAdmins');
+    }
+    else{
+        return redirect()->route('admin.login');
+    }
 });
 
 Route::get('/policies', function () {
-    return view('pages/policies');
+    if(session()->has('user')){
+        return view('pages/policies');
+    }
+    else{
+        return redirect()->route('admin.login');
+    }
 });
 
 Route::get('/policies/addPolicies', function () {
-    return view('inner_pages/addPolicies');
+    if(session()->has('user')){
+        return view('inner_pages/addPolicies');
+    }
+    else{
+        return redirect()->route('admin.login');
+    }
 });
 
 
@@ -90,4 +126,4 @@ Route::post('/dashboard', [FirebaseController::class ,'validateLogin'])->name('v
 // login page
 Route::get('/login', [ FirebaseController::class ,'loginPage'])->name('admin.login');
 //logout page
-Route::post('/login', 'UserController@logout')->name('admin.logout');
+Route::get('/logout', [ FirebaseController::class ,'logout'])->name('admin.logout');
