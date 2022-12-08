@@ -88,22 +88,26 @@
               }}
             @endphp
             </td>
-            <td class="text-center">
+            
             @php
               {{
                 if($adminDetails['status']==0){
                 @endphp
-                  <span style="background-color: #DBF9FC;">InActive</span>
+                <td class="text-center" style="background-color: #FF6863;">
+                  <b><span>In-Active</span></b>
+                </td>
                 @php
                 }                                                
                 else{
                 @endphp
-                  <span>Active</span>
+                <td class="text-center" style="background-color: #90EE70;">
+                  <b><span>Active</span></b>
+                </td>
                 @php
                 }
               }}
             @endphp
-            </td>
+            
             <td class="text-center" style="width:150px;">
               <a href="{{ route('admin.detail', ['adminID'=> $adminID ]) }}" class="btn btn-success saveBtn">Edit</a>
               

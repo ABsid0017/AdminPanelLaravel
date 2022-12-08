@@ -86,23 +86,25 @@
                 @endphp
                 
             </td>
-            <td class="text-center">
-            
-                @php
+            @php
                     {{
+                        
                         if($TaCbuyerDetails['status']==0){
-                        @endphp
-                            <span>InActive</span>
-                        @php
-                        }                                                
-                        else{
-                        @endphp
-                            <span>Active</span>
-                        @php
-                        }
+                            @endphp
+                            <td class="text-center" style="background-color: #FF6863;">
+                            <b><span>In-Active</span></b>
+                            </td>
+                            @php
+                            }                                                
+                            else{
+                            @endphp
+                            <td class="text-center" style="background-color: #90EE70;">
+                            <b><span>Active</span></b>
+                            </td>
+                            @php
+                            }
                     }}
                 @endphp
-            </td>
             <td style="width:165px;">
                 <a href="{{ route('buyerPolicies.detail', ['TaCbuyerID'=>$TaCbuyerID ]) }}" class="btn btn-success saveBtn">Edit</a>
                 <a href="{{ route('buyerPolicies.delete', ['TaCbuyerID'=>$TaCbuyerID]) }}" class="btn btn-danger">Delete</a>
@@ -175,23 +177,26 @@
                 }}
                 @endphp
             </td>
-            <td class="text-center">
             
                 @php
                     {{
+                        
                         if($TaCsellerDetails['status']==0){
-                        @endphp
-                            <span>InActive</span>
-                        @php
-                        }                                                
-                        else{
-                        @endphp
-                            <span>Active</span>
-                        @php
-                        }
+                            @endphp
+                            <td class="text-center" style="background-color: #FF6863;">
+                            <b><span>In-Active</span></b>
+                            </td>
+                            @php
+                            }                                                
+                            else{
+                            @endphp
+                            <td class="text-center" style="background-color: #90EE70;">
+                            <b><span>Active</span></b>
+                            </td>
+                            @php
+                            }
                     }}
                 @endphp
-            </td>
             <td style="width:165px;">
             <a href="{{ route('sellerPolicies.detail', ['TaCsellerID'=>$TaCsellerID ]) }}" class="btn btn-success saveBtn">Edit</a>
             <a href="{{ route('sellerPolicies.delete', ['TaCsellerID'=>$TaCsellerID]) }}" class="btn btn-danger">Delete</a>
