@@ -72,11 +72,18 @@
                         <label class="form-label" for="phone">Phone</label>
                         <input type="tel" class="form-control" placeholder="03xxxxxxxxx" name="phone" pattern="[0-9]{11}"  required>
                 </div>
-                 <div>
+                 <div class="form-outline mb-4">
                       <label for="exampleFormControlSelect1">Status</label>
                       <select class="form-control" id="exampleFormControlSelect1" name="statusDD">
                         <option value=1 selected >Active</option>
                         <option value=0>In-Active</option>
+                      </select>
+                 </div>
+                 <div>
+                      <label for="exampleFormControlSelect1">Is Super Admin</label>
+                      <select class="form-control" id="exampleFormControlSelect1" name="roleDD">
+                        <option value=1 >Yes</option>
+                        <option value=0 selected >No</option>
                       </select>
                  </div>
                 <div class="btn-block">

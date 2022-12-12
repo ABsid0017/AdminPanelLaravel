@@ -46,7 +46,7 @@
         </div>
         
         <div class="btn-block">
-          <input type="submit" value="Submit" class="btn btn-primary btn-block text-white">
+          <input type="submit" value="Login" class="btn btn-primary btn-block text-white">
         </div>
 
       </form>

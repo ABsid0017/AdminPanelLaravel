@@ -261,7 +261,8 @@ class FirebaseController extends Controller
             $password = $request->password;
             $phone = $request->phone;
             $status = $request->statusDD;
-            $admin = app('firebase.firestore')->database()->collection('users/WvamEGwHsbNkF3KImk2V/admin')->add(['name' => $name, 'email' => $email, 'password' => $password, 'phone' => $phone, 'status' => (int)$status]);
+            $role = $request->roleDD;
+            $admin = app('firebase.firestore')->database()->collection('users/WvamEGwHsbNkF3KImk2V/admin')->add(['name' => $name, 'email' => $email, 'password' => $password, 'phone' => $phone, 'status' => (int)$status, 'role' => (int)$role]);
             return view('pages/admins');
         }
         else{
@@ -274,12 +275,19 @@ class FirebaseController extends Controller
         $email = $request->email;
         $password = $request->password;
         $flag=0;
-        $admin = app('firebase.firestore')->database()->collection('users/WvamEGwHsbNkF3KImk2V/admin')->where('email', '=', $email)->where('password', '=', $password)->where('status', '=', 1)->documents();
+        $admin = app('firebase.firestore')->database()->collection('users/WvamEGwHsbNkF3KImk2V/admin')->where('email', '=', $email)->where('password', '=', $password)->documents();
         foreach ($admin as $document) {
             if ($document->exists()) {
-                $flag=1;
-                session()->put('user', $document->data());
+                $admindetail = $document->data();
+                if($admindetail['status']==1){
+                    $flag=1;
+                    session()->put('user', $document->data());
+                }
+                else{
+                    $flag=2;
+                }
             }
+            
             else{
                 $flag=0; 
             }
@@ -308,6 +316,10 @@ class FirebaseController extends Controller
             $orderCount = count($orderDetails);
             return view('pages.dashboard',compact('sellersCount','productCount','orderCount'));
         }
+        elseif($flag==2){
+            session()->flash('error', 'In-active contact admin');
+            return redirect()->route('admin.login');
+        }
         else{
             session()->flash('error', 'Invalid Credentials');
             return redirect()->route('admin.login');
@@ -322,6 +334,18 @@ class FirebaseController extends Controller
     {
         session()->forget('user');
         return redirect()->route('admin.login');
+    }
+
+    public function deleteAdmin($adminID){
+        if(session()->has('user')){
+            $admin = app('firebase.firestore')->database()->collection('users/WvamEGwHsbNkF3KImk2V/admin')->document($adminID)->delete();
+            $url=url('/admins');
+            $Heading='Admin Delete Successfully';
+            return view('inner_pages/deletePage',compact('url','Heading'));
+        }
+        else{
+            return redirect()->route('admin.login');
+        }
     }
 
 }

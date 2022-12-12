@@ -1,3 +1,4 @@
+
 <nav >
         <div class="logo">
             <img class="navLogo" src="{{ URL::asset('img/logo.png') }}" alt="logo">
@@ -11,7 +12,27 @@
             <li> <a href="{{ url('/users') }}">Seller Management</a></li>
             <li> <a href="{{ url('/complains') }}">Complaints</a></li>
             <li> <a href="{{ url('/policies') }}">Policies</a></li>
+            @php
+            $userDetail = session()->get('user');
+            if($userDetail['role']==1){
+            @endphp
             <li> <a href="{{ url('/admins') }}">Admins</a></li>
-            <li> <a class="btn btn-light" href="{{ route('admin.logout') }}" role="button" style="background: #0e1a35; color: #fff;">Logout</a></li>
+            @php
+            }
+            @endphp
+            <li> 
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <span style="padding-right: 10px;" >Hi  !</span>
+                @php
+                $userDetail = session()->get('user');
+                print($userDetail['name']);
+                @endphp
+                </button>
+                <div class="dropdown-content">
+                    <a href="{{ route('admin.logout') }}">Logout</a>
+                </div>
+            </div>
+            </li>
         </ul>
     </nav>

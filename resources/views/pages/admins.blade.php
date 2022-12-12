@@ -108,9 +108,9 @@
               }}
             @endphp
             
-            <td class="text-center" style="width:150px;">
+            <td class="text-center" style="width: 170px;">
               <a href="{{ route('admin.detail', ['adminID'=> $adminID ]) }}" class="btn btn-success saveBtn">Edit</a>
-              
+              <a href="{{ route('admin.delete', ['adminID'=> $adminID ]) }}" class="btn btn-danger">Delete</a>
             </td>
           </tr>
           @php

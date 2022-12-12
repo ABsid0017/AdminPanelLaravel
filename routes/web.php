@@ -49,7 +49,13 @@ Route::get('/complains', function () {
 
 Route::get('/admins', function () {
     if(session()->has('user')){
-        return view('pages/admins');
+        $userDetail = session()->get('user');
+        if($userDetail['role']==1){
+            return view('pages/admins');
+        }
+        else{
+            return redirect()->route('validate.login');
+        }
     }
     else{
         return redirect()->route('admin.login');
@@ -58,7 +64,13 @@ Route::get('/admins', function () {
 
 Route::get('/admins/addAdmins', function () {
     if(session()->has('user')){
-        return view('inner_pages/addAdmins');
+        $userDetail = session()->get('user');
+        if($userDetail['role']==1){
+            return view('inner_pages/addAdmins');
+        }
+        else{
+            return redirect()->route('validate.login');
+        }
     }
     else{
         return redirect()->route('admin.login');
@@ -121,6 +133,9 @@ Route::get('/admins/editadmin/{adminID}',[ FirebaseController::class ,'getAdminD
 Route::post('admins', [FirebaseController::class ,'updateAdminDetail'])->name('admin.update');
 //Add Admin
 Route::post('addAdmin', [FirebaseController::class ,'addAdminDetail'])->name('admin.add');
+// delete Admin
+Route::get('/admins/deleteadmin/{adminID}',[ FirebaseController::class ,'deleteAdmin'])->name('admin.delete');
+
 //check Login
 Route::post('/dashboard', [FirebaseController::class ,'validateLogin'])->name('validate.login');
 // login page
