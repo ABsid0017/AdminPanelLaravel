@@ -14,6 +14,7 @@ class FirebaseController extends Controller
             $sellerDetails=[];
             $productDetails=[];
             $orderDetails=[];
+            $complaintDetails=[];
             $sellers = app('firebase.firestore')->database()->collection('users/WvamEGwHsbNkF3KImk2V/sellers')->documents();
             foreach ($sellers as $document) { 
                 array_push($sellerDetails, $document->data());
@@ -26,11 +27,16 @@ class FirebaseController extends Controller
             foreach ($orders as $document) { 
                 array_push($orderDetails, $document->data());
             }
+            $complaints=app('firebase.firestore')->database()->collection('complaints')->where('status', '=', 0)->documents();
+            foreach ($complaints as $document) { 
+                array_push($complaintDetails, $document->data());
+            }
 
             $sellersCount = count($sellerDetails);
             $productCount = count($productDetails);
             $orderCount = count($orderDetails);
-            return view('pages.dashboard',compact('sellersCount','productCount','orderCount'));
+            $complaintCount = count($complaintDetails);
+            return view('pages.dashboard',compact('sellersCount','productCount','orderCount','complaintCount'));
         }
         else{
             return redirect()->route('admin.login');
@@ -298,6 +304,7 @@ class FirebaseController extends Controller
             $sellerDetails=[];
             $productDetails=[];
             $orderDetails=[];
+            $complaintDetails=[];
             $sellers = app('firebase.firestore')->database()->collection('users/WvamEGwHsbNkF3KImk2V/sellers')->documents();
             foreach ($sellers as $document) { 
                 array_push($sellerDetails, $document->data());
@@ -310,11 +317,16 @@ class FirebaseController extends Controller
             foreach ($orders as $document) { 
                 array_push($orderDetails, $document->data());
             }
+            $complaints=app('firebase.firestore')->database()->collection('complaints')->where('status', '=', 0)->documents();
+            foreach ($complaints as $document) { 
+                array_push($complaintDetails, $document->data());
+            }
 
             $sellersCount = count($sellerDetails);
             $productCount = count($productDetails);
             $orderCount = count($orderDetails);
-            return view('pages.dashboard',compact('sellersCount','productCount','orderCount'));
+            $complaintCount = count($complaintDetails);
+            return view('pages.dashboard',compact('sellersCount','productCount','orderCount','complaintCount'));
         }
         elseif($flag==2){
             session()->flash('error', 'In-active contact admin');
@@ -342,6 +354,19 @@ class FirebaseController extends Controller
             $url=url('/admins');
             $Heading='Admin Delete Successfully';
             return view('inner_pages/deletePage',compact('url','Heading'));
+        }
+        else{
+            return redirect()->route('admin.login');
+        }
+    }
+
+    //update complain status
+    public function updateComplainStatus(Request $request)
+    {
+        if(session()->has('user')){
+            $complainID = $request->complainID;
+            $complain = app('firebase.firestore')->database()->collection('complaints')->document($complainID)->update([['path' => 'status', 'value' => 1]]);
+            return redirect()->route('complain.home');
         }
         else{
             return redirect()->route('admin.login');

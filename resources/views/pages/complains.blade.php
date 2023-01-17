@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Dashboard</title>
+    <title>Complains</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
 
@@ -32,51 +32,107 @@
 <div class="container">
  <div class="row">
    <div class="col-12">
-     <table class="table table-bordered">
+     <table class="table table-bordered complainsTable">
        <thead>
          <tr>
-           <th scope="col">S.No #</th>
+           <th scope="col">S.No</th>
            <th scope="col">Name</th>
            <th scope="col">Email</th>
            <th scope="col">Title</th>
            <th scope="col">Description</th>
+           <th scope="col">From</th>
+           <th scope="col">Complaint Date</th>
             <th scope="col">Action</th>
          </tr>
        </thead>
        <tbody>
+        @php
+        $i=1;
+        $name;
+        $email;
+        $complaints = app('firebase.firestore')->database()->collection('complaints')->where('status', '=', 0)->documents();
+        foreach($complaints as $document){
+        $row = $document->data();
+        $rowId = $document->Id();
+        if($row['from']==0){
+          $buyerData = app('firebase.firestore')->database()->collection('users/WvamEGwHsbNkF3KImk2V/buyer')->document($row['complainerID'])->snapshot()->data();
+          $name=$buyerData['name'];
+          $email=$buyerData['email'];
+        }
+        else{
+          $sellerData = app('firebase.firestore')->database()->collection('users/WvamEGwHsbNkF3KImk2V/sellers')->document($row['complainerID'])->snapshot()->data();
+          $name=$sellerData['name'];
+          $email=$sellerData['email'];
+        }
+        
+        @endphp
          <tr>
-           <th scope="row">1</th>
-           <td>Hassan Ali Gohar</td>
-           <td>hasankhan545454@gmail.com</td>
-           <td>Complaint 01</td>
-           <td>Here is my first Complaint</td>
+           <th scope="row" class="text-center" style="vertical-align: middle;">
+            @php
+              {{ 
+                  print($i); 
+              }}
+            @endphp
+           </th>
+           <td >
+           @php
+              {{ 
+                  print($name); 
+              }}
+            @endphp
+            </td>
            <td>
-            <button type="button" class="btn btn-primary button">View</button>
-             <button type="button" class="btn btn-success button">Resolved</button>
+           @php
+              {{ 
+                  print($email); 
+              }}
+            @endphp
+           </td>
+           <td>
+           @php
+              {{ 
+                  print($row['title']); 
+              }}
+            @endphp
+           </td>
+           <td style="width: 335px;">
+            @php
+              {{ 
+                  print($row['description']); 
+              }}
+            @endphp
+           </td>
+            @php
+              {{ 
+                  if($row['from']==0){
+                    @endphp
+                    <td>Buyer</td>
+                    @php
+                  }
+                  else{
+                    @endphp
+                    <td style="background-color:skyblue;">Seller</td>
+                    @php
+                  } 
+              }}
+            @endphp
+           <td>
+            @php
+              {{ 
+                  print($row['createdDate']); 
+              }}
+            @endphp
+           </td>
+           <td style="width: 100px;"> 
+              <a href="{{ route('complain.resolved', ['complainID'=> $rowId ]) }}" type="button" class="btn btn-success button">Resolved</a>
            </td>
          </tr>
-         <tr>
-           <th scope="row">2</th>
-           <td>Hassan Ali Gohar</td>
-           <td>hasankhan545454@gmail.com</td>
-           <td>Complaint 01</td>
-           <td>Here is my first Complaint</td>
-           <td>
-             <button type="button" class="btn btn-primary button">View</button>
-             <button type="button" class="btn btn-success button">Resolved</button>
-           </td>
-         </tr>
-         <tr>
-           <th scope="row">3</th>
-           <td>Hassan Ali Gohar</td>
-           <td>hasankhan545454@gmail.com</td>
-           <td>Complaint 01</td>
-           <td>Here is my first Complaint</td>
-           <td>
-             <button type="button" class="btn btn-primary button">View</button>
-             <button type="button" class="btn btn-success button">Resolved</button>
-           </td>
-         </tr>
+          @php
+          $i++;
+          $name="";
+          $email="";
+          }
+          @endphp
        </tbody>
      </table>
    </div>
@@ -90,48 +146,103 @@
 <div class="container">
  <div class="row">
    <div class="col-12">
-     <table class="table table-bordered">
+     <table class="table table-bordered complainsTable">
        <thead>
          <tr>
-           <th scope="col">S.No #</th>
+         <th scope="col">S.No</th>
            <th scope="col">Name</th>
            <th scope="col">Email</th>
            <th scope="col">Title</th>
            <th scope="col">Description</th>
-            <th scope="col">Action</th>
+           <th scope="col">From</th>
+           <th scope="col">Complaint Date</th>
          </tr>
        </thead>
        <tbody>
-         <tr>
-           <th scope="row">1</th>
-           <td>Hassan Ali Gohar</td>
-           <td>hasankhan545454@gmail.com</td>
-           <td>Complaint 01</td>
-           <td>Here is my first Complaint</td>
+       @php
+        $i=1;
+        $name;
+        $email;
+        $complaints = app('firebase.firestore')->database()->collection('complaints')->where('status', '=', 1)->documents();
+        foreach($complaints as $document){
+        $row = $document->data();
+        $rowId = $document->Id();
+        if($row['from']==0){
+          $buyerData = app('firebase.firestore')->database()->collection('users/WvamEGwHsbNkF3KImk2V/buyer')->document($row['complainerID'])->snapshot()->data();
+          $name=$buyerData['name'];
+          $email=$buyerData['email'];
+        }
+        else{
+          $sellerData = app('firebase.firestore')->database()->collection('users/WvamEGwHsbNkF3KImk2V/sellers')->document($row['complainerID'])->snapshot()->data();
+          $name=$sellerData['name'];
+          $email=$sellerData['email'];
+        }
+        
+        @endphp
+        <tr>
+           <th scope="row" class="text-center" style="vertical-align: middle;">
+            @php
+              {{ 
+                  print($i); 
+              }}
+            @endphp
+           </th>
+           <td >
+           @php
+              {{ 
+                  print($name); 
+              }}
+            @endphp
+            </td>
            <td>
-            <button type="button" class="btn btn-primary button">View</button>
+           @php
+              {{ 
+                  print($email); 
+              }}
+            @endphp
            </td>
-         </tr>
-         <tr>
-           <th scope="row">2</th>
-           <td>Hassan Ali Gohar</td>
-           <td>hasankhan545454@gmail.com</td>
-           <td>Complaint 01</td>
-           <td>Here is my first Complaint</td>
            <td>
-             <button type="button" class="btn btn-primary button">View</button>
+           @php
+              {{ 
+                  print($row['title']); 
+              }}
+            @endphp
            </td>
-         </tr>
-         <tr>
-           <th scope="row">3</th>
-           <td>Hassan Ali Gohar</td>
-           <td>hasankhan545454@gmail.com</td>
-           <td>Complaint 01</td>
-           <td>Here is my first Complaint</td>
+           <td style="width: 335px;">
+            @php
+              {{ 
+                  print($row['description']); 
+              }}
+            @endphp
+           </td>
+            @php
+              {{ 
+                  if($row['from']==0){
+                    @endphp
+                    <td>Buyer</td>
+                    @php
+                  }
+                  else{
+                    @endphp
+                    <td style="background-color:skyblue;">Seller</td>
+                    @php
+                  } 
+              }}
+            @endphp
            <td>
-             <button type="button" class="btn btn-primary button">View</button>
-           </td>
+            @php
+              {{ 
+                  print($row['createdDate']); 
+              }}
+            @endphp
+           
          </tr>
+          @php
+          $i++;
+          $name="";
+          $email="";
+          }
+          @endphp
        </tbody>
      </table>
    </div>

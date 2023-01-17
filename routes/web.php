@@ -45,7 +45,7 @@ Route::get('/complains', function () {
         return redirect()->route('admin.login');
     }
     
-});
+})->name('complain.home');
 
 Route::get('/admins', function () {
     if(session()->has('user')){
@@ -142,3 +142,6 @@ Route::post('/dashboard', [FirebaseController::class ,'validateLogin'])->name('v
 Route::get('/login', [ FirebaseController::class ,'loginPage'])->name('admin.login');
 //logout page
 Route::get('/logout', [ FirebaseController::class ,'logout'])->name('admin.logout');
+
+//resolved complain
+Route::get('/complains/{complainID}',[ FirebaseController::class ,'updateComplainStatus'])->name('complain.resolved');

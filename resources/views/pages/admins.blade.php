@@ -58,6 +58,9 @@
           foreach ($admin as $document) { 
           $adminDetails = $document->data();
           $adminID=$document->Id();
+          
+          $userDetail = session()->get('user');
+          if($adminDetails['email'] != $userDetail['email']){
           @endphp
           <tr>
             <td class="text-center">
@@ -116,6 +119,7 @@
           @php
             $i++;
             }
+          }
           @endphp
         </tbody>
       </table>

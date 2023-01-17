@@ -23,8 +23,8 @@
 
     @include('layout.header')
 
-    <div class="sellerTable">
-        <div class="container">
+    <div class="sellerTable" style="background-color: #2257d490;">
+        <div class="container-fluid" style="padding:0px;">
             <div class="row">
                 <div class="col-12">
                     <table class="table table-bordered">

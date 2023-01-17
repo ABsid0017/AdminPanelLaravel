@@ -32,12 +32,11 @@
       <div class="socialicons">
           <h4> Social Link</h4>
         <div class="row container d-flex ">
-                <div class="template-demo">
-                    <button type="button" class="btn btn-social-icon btn-facebook btn-rounded"><i class="fa fa-facebook"></i></button>
-                                                       
-                    <button type="button" class="btn btn-social-icon btn-twitter btn-rounded"><i class="fa fa-twitter"></i></button>
-                   <button type="button" class="btn btn-social-icon btn-linkedin btn-rounded"><i class="fa fa-linkedin"></i></button>
-                    <button type="button" class="btn btn-social-icon btn-instagram btn-rounded"><i class="fa fa-instagram"></i></button>
+                <div class="template-demo socialLink">
+                    <a href="https://www.facebook.com/people/Aqua-Meals/100084544783230/" target="_blank" type="button" class="btn btn-social-icon btn-facebook btn-rounded"><i class="fa fa-facebook"></i></a>
+                    <a href="https://twitter.com/AquaMeals" target="_blank" type="button" class="btn btn-social-icon btn-twitter btn-rounded"><i class="fa fa-twitter"></i></a>
+                    <a href="https://www.youtube.com/channel/UCWD8x7BudOgsWJCcGWeribQ" target="_blank" type="button" class="btn btn-social-icon btn-linkedin btn-rounded"><i class="fa fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/aqua_meals/" target="_blank" type="button" class="btn btn-social-icon btn-instagram btn-rounded"><i class="fa fa-instagram"></i></a>
                   </div>
                 </div>
               </div>
@@ -51,7 +50,7 @@
       <div class="row">
         <div class="col-xl-12 col-md-12 col-xs-12 ">
          
-          <p class="footer-text">&copy; Copyright 2023 - City of Pakistan.  All rights reserved.</p>
+          <p class="footer-text">&copy; Copyright 2023 - TechBeast.  All rights reserved.</p>
         </div>
       </div>
     </div>

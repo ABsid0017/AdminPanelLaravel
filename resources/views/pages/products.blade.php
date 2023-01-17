@@ -25,7 +25,7 @@
     @include('layout.header')
 
     <div class="sellerTable">
-        <div class="container-fluid">
+        <div class="container-fluid" style="padding:0px;">
                 <div class="col-xs-12">
                     <table class="table table-bordered">
                         <thead style="background-color: #2257d4;">
@@ -116,7 +116,7 @@
                                         </p>
                                     </div>
                                 </td>
-                                <td style="width:120px;">
+                                <td style="width:140px;">
                                     <div class="text-center text-sm text-white">
                                         <p>Regular price : <br>
                                             <span style="color: #f2bc94;">
@@ -164,8 +164,8 @@
                                         </p>
                                     </div>
                                 </td>
-                                <td style="width:220px;" >
-                                    <div class="text-white" style="width:220px;">
+                                <td style="width:200px;" >
+                                    <div class="text-white">
                                         @php
                                             {{ 
                                                 print($row['description']); 

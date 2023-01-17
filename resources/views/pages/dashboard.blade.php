@@ -53,7 +53,7 @@
                     <a href="{{ url('/complains') }}">
                         <div class="count">
                             <span class="fa fa-list-alt"></span>
-                            <p class="number">896</p>
+                            <p class="number">{{ $complaintCount }}</p>
                             <h4>Complaints</h4> 
                         </div>
                     </a>

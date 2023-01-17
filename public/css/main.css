@@ -83,7 +83,7 @@ nav a:hover {
 
 .mainfooter {
     background-color: #0e1a35;
-    margin-top: 2px;
+    margin-top: -15px;
 }
 
 .mainfooter p {
@@ -96,6 +96,14 @@ nav a:hover {
 
 }
 
+.socialLink a {
+    align-items: center;
+    display: inline-grid;
+}
+
+.socialLink i {
+    color: white;
+}
 
 
 
@@ -158,6 +166,14 @@ nav a:hover {
     margin-top: 5px;
     padding-top: 5px;
     padding-bottom: 5px;
+}
+
+.complainsTable td {
+    vertical-align: middle;
+}
+
+.complainsTable thead {
+    background-color: #3097f7;
 }
 
 
@@ -1035,12 +1051,12 @@ a:hover {
 }
 
 .btn-linkedin {
-    background: #0177b5;
+    background: #E62117;
     color: #ffffff;
 }
 
 .btn-instagram {
-    background: #dc4a38;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
     color: #ffffff;
 }
 
@@ -1059,13 +1075,13 @@ a:hover {
 
 .btn-linkedin:hover,
 .btn-linkedin:focus {
-    background: #015682;
+    background: #e62117c2;
     color: #ffffff;
 }
 
 .btn-instagram:hover,
 .btn-instagram:focus {
-    background: #bf3322;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
     color: #ffffff;
 }
 
